@@ -46,10 +46,10 @@ if [ -f "lib/python2.7" ]; then
   exit 1;
 fi
 
-# Copy artifacts out of cache if exists.
+# Purge cache if exists.
 mkdir -p $CACHE_DIR
 for dir in $VIRTUALENV_DIRS; do
-  cp -R $CACHE_DIR/$dir . &> /dev/null || true
+  rm -fr $CACHE_DIR/$dir &> /dev/null || true
 done
 
 # Create virtualenv. Rebuild if corrupt.
