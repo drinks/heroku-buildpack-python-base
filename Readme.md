@@ -12,7 +12,7 @@ Example usage:
     $ ls
     Procfile  requirements.txt  web.py
 
-    $ heroku create --stack cedar --buildpack git@github.com:heroku/heroku-buildpack-python.git
+    $ heroku create --stack cedar --buildpack git@github.com:kennethreitz/heroku-buildpack-python.git#purge
 
     $ git push heroku master
     ...
