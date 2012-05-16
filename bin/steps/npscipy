@@ -21,6 +21,7 @@ VENDORED_SCIPY="scipy-0.10.1"
 #if (grep -iq "-e numpy -e scipy" setup.py) then
   echo "-----> Noticed numpy/scipy. Bootstrapping prebuilt binaries."
   cd .heroku
+  echo "-----> heroku contents: $(ls)"
   ## check whether this has happened already
   ## set BLAS/LAPACK/ATLAS
   ## append to LD_LIBRARY_PATH/LIBRARY_PATH/PYTHONPATH
@@ -33,6 +34,7 @@ VENDORED_SCIPY="scipy-0.10.1"
     echo "-----> Creating/downloading binaries."
     # Download and extract everything into target vendor directory.
     git clone ${VENDORED_GIT_REPO} > /dev/null
+    echo "-----> heroku contents: $(ls)"
     cd vendor 
     tar -zxvf ../${VENDORED_GIT_NAME}/${VENDORED_BINARIES}.tar.gz > /dev/null
     cd ..
