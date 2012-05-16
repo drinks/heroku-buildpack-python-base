@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+# This script serves as the Scipy/Numpy build step of the
+# [**Python Buildpack**](https://github.com/heroku/heroku-buildpack-python) 
+# compiler. 
+# 
+# A [buildpack](http://devcenter.heroku.com/articles/buildpacks) is an 
+# adapter between a Python application and Heroku's runtime.
+#
+# This script is invoked by [`bin/compile`](/).
+VENDORED_GIT_NAME="npscipy-binaries"
+VENDORED_GIT_REPO="git@github.com:wyn/${VENDORED_GIT_NAME}.git"
+# The location of the pre-compiled atlas/lapack/blas/gfortran binaries.
+VENDORED_BINARIES="npscipy"
+# the location of the bdist of numpy
+VENDORED_NUMPY="numpy-1.6.1"
+# the location of the bdist of scipy
+VENDORED_SCIPY="scipy-0.10.1"
+
+# If numpy or scipy exists within setup.py, use vendored binaries.
+if (grep -iq "-e numpy -e scipy" setup.py) then
+  echo "-----> Noticed numpy/scipy. Bootstrapping prebuilt binaries."
+  cd .heroku
+  ## check whether this has happened already
+  ## set BLAS/LAPACK/ATLAS
+  ## append to LD_LIBRARY_PATH/LIBRARY_PATH/PYTHONPATH
+  if [ -d "vendor/lib/atlas-base" ]; then
+    echo "-----> Using cached binaries."
+    export BLAS=$(pwd)/vendor/lib/atlas-base/atlas/libblas.a
+    export LAPACK=$(pwd)/vendor/lib/atlas-base/atlas/liblapack.a
+    export ATLAS=$(pwd)/vendor/lib/atlas-base/libatlas.a
+  else
+    echo "-----> Creating/downloading binaries."
+    # Download and extract everything into target vendor directory.
+    git clone ${VENDORED_GIT_REPO}
+    cd ${VENDORED_GIT_NAME} ## now in .heroku/npscip-binaries
+    tar -zxvf ${VENDORED_BINARIES}.tar.gz > /dev/null
+    mv ${VENDORED_BINARIES}/lib/* $(pwd)/vendor/lib
+    export BLAS=$(pwd)/vendor/lib/atlas-base/atlas/libblas.a
+    export LAPACK=$(pwd)/vendor/lib/atlas-base/atlas/liblapack.a
+    export ATLAS=$(pwd)/vendor/lib/atlas-base/libatlas.a
+    cd ..
+    rm -rf ${VENDORED_GIT_NAME}
+    export LIBMEMCACHED=$(pwd)/vendor
+  fi
+  cd ..
+fi
+
+
+
