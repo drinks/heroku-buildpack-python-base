@@ -35,7 +35,7 @@ VENDORED_SCIPY="scipy-0.10.1"
     git clone ${VENDORED_GIT_REPO}
     cd ${VENDORED_GIT_NAME} ## now in .heroku/npscip-binaries
     tar -zxvf ${VENDORED_BINARIES}.tar.gz > /dev/null
-    mv ${VENDORED_BINARIES}/lib/* $(pwd)/vendor/lib
+    mv lib/* $(pwd)/vendor/lib
     export BLAS=$(pwd)/vendor/lib/atlas-base/atlas/libblas.a
     export LAPACK=$(pwd)/vendor/lib/atlas-base/atlas/liblapack.a
     export ATLAS=$(pwd)/vendor/lib/atlas-base/libatlas.a
