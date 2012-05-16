@@ -168,6 +168,9 @@ source $BIN_DIR/steps/pylibmc
 # Numpy/scipy support
 source $BIN_DIR/steps/npscipy
 
+# OpenOpt support
+source $BIN_DIR/steps/openopt
+
 # Activate the Virtualenv.
 puts-step "Activating virtualenv"
 source $VIRTUALENV_LOC/bin/activate
@@ -175,13 +178,6 @@ source $VIRTUALENV_LOC/bin/activate
 # Install Mercurial if it appears to be required.
 if (grep -Fiq "hg+" requirements.txt) then
   pip install --use-mirrors mercurial | indent
-fi
-
-# Install openopt if it appears to be required.
-if (grep -Fiq "openopt" setup.py) then
-  puts-step "Installing openopt"
-  puts-step $(env)
-  easy_install openopt | indent
 fi
 
 # Install dependencies with Pip.
