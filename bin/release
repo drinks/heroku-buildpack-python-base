@@ -16,9 +16,9 @@ config_vars:
   PYTHONHASHSEED: random
   PYTHONHOME: /app/.heroku/venv/
   PYTHONPATH: /app/
-  BLAS=/app/.heroku/vendor/lib/atlas-base/atlas/libblas.a
-  LAPACK=/app/.heroku/vendor/lib/atlas-base/atlas/liblapack.a
-  ATLAS=/app/.heroku/vendor/lib/atlas-base/libatlas.a
+  BLAS: /app/.heroku/vendor/lib/atlas-base/atlas/libblas.a
+  LAPACK: /app/.heroku/vendor/lib/atlas-base/atlas/liblapack.a
+  ATLAS: /app/.heroku/vendor/lib/atlas-base/libatlas.a
 EOF
 
 
