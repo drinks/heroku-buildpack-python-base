@@ -18,7 +18,7 @@ VENDORED_NUMPY="numpy-1.6.1"
 VENDORED_SCIPY="scipy-0.10.1"
 
 # If numpy or scipy exists within setup.py, use vendored binaries.
-if (grep -iq "-e numpy -e scipy" setup.py) then
+#if (grep -iq "-e numpy -e scipy" setup.py) then
   echo "-----> Noticed numpy/scipy. Bootstrapping prebuilt binaries."
   cd .heroku
   ## check whether this has happened already
@@ -41,10 +41,9 @@ if (grep -iq "-e numpy -e scipy" setup.py) then
     export ATLAS=$(pwd)/vendor/lib/atlas-base/libatlas.a
     cd ..
     rm -rf ${VENDORED_GIT_NAME}
-    export LIBMEMCACHED=$(pwd)/vendor
   fi
   cd ..
-fi
+#fi
 
 
 
