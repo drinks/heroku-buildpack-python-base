@@ -27,9 +27,6 @@ if (grep -iq -e "numpy" -e "scipy" setup.py) then
   ## set BLAS/LAPACK/ATLAS
   if [ -d "vendor/lib/atlas-base" ]; then
     echo "-----> Using cached binaries."
-    # export BLAS=$(pwd)/vendor/lib/atlas-base/atlas/libblas.a
-    # export LAPACK=$(pwd)/vendor/lib/atlas-base/atlas/liblapack.a
-    # export ATLAS=$(pwd)/vendor/lib/atlas-base/libatlas.a
   else
     echo "-----> Creating/downloading binaries."
     # Download and extract everything into target vendor directory.
@@ -37,15 +34,11 @@ if (grep -iq -e "numpy" -e "scipy" setup.py) then
     echo "-----> heroku contents: $(ls)"
     echo "-----> heroku binaries contents: $(ls ${VENDORED_GIT_NAME})"
     tar -xvf ${VENDORED_GIT_NAME}/${VENDORED_BINARIES}.tar.gz > /dev/null
-    # export BLAS=$(pwd)/vendor/lib/atlas-base/atlas/libblas.a
-    # export LAPACK=$(pwd)/vendor/lib/atlas-base/atlas/liblapack.a
-    # export ATLAS=$(pwd)/vendor/lib/atlas-base/libatlas.a
   fi
   # export BLAS=$(pwd)/vendor/lib/atlas-base/atlas/libblas.a
   # export LAPACK=$(pwd)/vendor/lib/atlas-base/atlas/liblapack.a
   # export ATLAS=$(pwd)/vendor/lib/atlas-base/libatlas.a
 
-  ## append to LD_LIBRARY_PATH/LIBRARY_PATH/PYTHONPATH
   if [ -d "venv/lib/python2.7/site-packages/numpy" ]; then
     echo "-----> Using cached numpy."
   else
@@ -53,7 +46,6 @@ if (grep -iq -e "numpy" -e "scipy" setup.py) then
     tar -xvf ${VENDORED_GIT_NAME}/${VENDORED_NUMPY}.tar.gz > /dev/null
   fi
   
-  ## append to LD_LIBRARY_PATH/LIBRARY_PATH/PYTHONPATH
   if [ -d "venv/lib/python2.7/site-packages/scipy" ]; then
     echo "-----> Using cached scipy."
   else
