@@ -22,6 +22,12 @@ VENDORED_SCIPY="scipy-0.10.1"
   echo "-----> Noticed numpy/scipy. Bootstrapping prebuilt binaries."
   cd .heroku
   echo "-----> heroku contents: $(ls)"
+  if [ ! -d "vendor" ]; then
+    echo "-----> making vendor dir"
+    mkdir vendor
+  fi
+  echo "-----> heroku contents: $(ls)"
+
   ## check whether this has happened already
   ## set BLAS/LAPACK/ATLAS
   ## append to LD_LIBRARY_PATH/LIBRARY_PATH/PYTHONPATH
