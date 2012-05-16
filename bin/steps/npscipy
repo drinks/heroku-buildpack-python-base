@@ -32,14 +32,13 @@ VENDORED_SCIPY="scipy-0.10.1"
   else
     echo "-----> Creating/downloading binaries."
     # Download and extract everything into target vendor directory.
-    git clone ${VENDORED_GIT_REPO}
-    cd ${VENDORED_GIT_NAME} ## now in .heroku/npscip-binaries
-    tar -zxvf ${VENDORED_BINARIES}.tar.gz > /dev/null
-    mv lib/* $(pwd)/../vendor/lib
-    export BLAS=$(pwd)/../vendor/lib/atlas-base/atlas/libblas.a
-    export LAPACK=$(pwd)/../vendor/lib/atlas-base/atlas/liblapack.a
-    export ATLAS=$(pwd)/../vendor/lib/atlas-base/libatlas.a
+    git clone ${VENDORED_GIT_REPO} > /dev/null
+    cd vendor 
+    tar -zxvf ../${VENDORED_GIT_NAME}/${VENDORED_BINARIES}.tar.gz > /dev/null
     cd ..
+    export BLAS=$(pwd)/vendor/lib/atlas-base/atlas/libblas.a
+    export LAPACK=$(pwd)/vendor/lib/atlas-base/atlas/liblapack.a
+    export ATLAS=$(pwd)/vendor/lib/atlas-base/libatlas.a
     rm -rf ${VENDORED_GIT_NAME}
   fi
   cd ..
