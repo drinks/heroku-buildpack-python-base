@@ -178,7 +178,8 @@ if (grep -Fiq "hg+" requirements.txt) then
 fi
 
 # Install openopt if it appears to be required.
-if (grep -Fiq "openopt" requirements.txt) then
+if (grep -Fiq "openopt" setup.py) then
+  puts-step "Installing openopt"
   easy_install openopt | indent
 fi
 
