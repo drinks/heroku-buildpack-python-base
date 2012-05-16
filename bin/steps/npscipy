@@ -25,7 +25,6 @@ VENDORED_SCIPY="scipy-0.10.1"
 
   ## check whether this has happened already
   ## set BLAS/LAPACK/ATLAS
-  ## append to LD_LIBRARY_PATH/LIBRARY_PATH/PYTHONPATH
   if [ -d "vendor/lib/atlas-base" ]; then
     echo "-----> Using cached binaries."
     export BLAS=$(pwd)/vendor/lib/atlas-base/atlas/libblas.a
@@ -41,11 +40,30 @@ VENDORED_SCIPY="scipy-0.10.1"
     export BLAS=$(pwd)/vendor/lib/atlas-base/atlas/libblas.a
     export LAPACK=$(pwd)/vendor/lib/atlas-base/atlas/liblapack.a
     export ATLAS=$(pwd)/vendor/lib/atlas-base/libatlas.a
-    rm -rf ${VENDORED_GIT_NAME}
   fi
   export BLAS=$(pwd)/vendor/lib/atlas-base/atlas/libblas.a
   export LAPACK=$(pwd)/vendor/lib/atlas-base/atlas/liblapack.a
   export ATLAS=$(pwd)/vendor/lib/atlas-base/libatlas.a
+
+  ## append to LD_LIBRARY_PATH/LIBRARY_PATH/PYTHONPATH
+  if [ -d "venv/lib/python2.7/site-packages/numpy" ]; then
+    echo "-----> Using cached numpy."
+  else
+    echo "-----> Creating/downloading numpy bdist."
+    tar -xvf ${VENDORED_GIT_NAME}/${VENDORED_NUMPY}.tar.gz > /dev/null
+  fi
+  
+  ## append to LD_LIBRARY_PATH/LIBRARY_PATH/PYTHONPATH
+  if [ -d "venv/lib/python2.7/site-packages/scipy" ]; then
+    echo "-----> Using cached scipy."
+  else
+    echo "-----> Creating/downloading scipy bdist."
+    tar -xvf ${VENDORED_GIT_NAME}/${VENDORED_SCIPY}.tar.gz > /dev/null
+  fi
+  
+  if [ -d ${VENDORED_GIT_NAME} ]; then
+    rm -rf ${VENDORED_GIT_NAME}
+  fi
   cd ..
 #fi
 
