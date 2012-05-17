@@ -168,8 +168,12 @@ source $BIN_DIR/steps/pylibmc
 # Numpy/scipy support
 source $BIN_DIR/steps/npscipy
 
+## stuff that's dependent on numpy/scipy
 # OpenOpt support
 source $BIN_DIR/steps/openopt
+
+# h5py support
+source $BIN_DIR/steps/h5py
 
 # Activate the Virtualenv.
 puts-step "Activating virtualenv"
