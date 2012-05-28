@@ -35,7 +35,7 @@ VENDORED_BINARIES="ipython-0.13.dev"
     rm -rf ${VENDORED_GIT_NAME}
   fi
   # cd ..
-fi
+# fi
 
 
 
