@@ -9,7 +9,7 @@
 #
 # This script is invoked by [`bin/compile`](/).
 VENDORED_GIT_NAME="openopt-bdist"
-VENDORED_GIT_REPO="git@github.com:wyn/${VENDORED_GIT_NAME}.git"
+VENDORED_GIT_REPO="git://github.com/wyn/${VENDORED_GIT_NAME}.git"
 # The location of the pre-compiled bdist
 VENDORED_BINARIES="openopt-0.38"
 
